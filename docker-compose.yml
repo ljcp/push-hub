@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  push-hub:
+    image: ghcr.io/well-revolution/push-hub:multi
+    container_name: push-hub
+    ports:
+      - "3000:3000"  # HTTP API
+      - "1883:1883"  # MQTT Broker
+    environment:
+      - PORT=3000
+      - MQTT_PORT=1883
+      - PUSH_CERT_PATH=/usr/src/app/certs/PushCert.pem
+      - PUSH_KEY_PATH=/usr/src/app/certs/PushKey.pem
+      - APN_PRODUCTION=false
+      - APN_BUNDLE_ID=com.your.app.bundle.id
+    volumes:
+      - ./certs:/usr/src/app/certs
+    restart: unless-stopped 
