@@ -18,7 +18,6 @@ const apnProvider = new apn.Provider({
 const sendNotification = async (deviceTokens, notificationPayload) => {
   const message = new apn.Notification();
   Object.assign(message, notificationPayload);
-  console.log('sss',process.env.APN_BUNDLE_ID);
   message.topic = process.env.APN_BUNDLE_ID;
   return apnProvider.send(message, deviceTokens);
 };
